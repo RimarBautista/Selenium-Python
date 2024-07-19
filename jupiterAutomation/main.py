@@ -15,6 +15,8 @@ import time
 options = Options()
 options.add_experimental_option("detach", True)
 
+
+
 class testCases(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
@@ -149,9 +151,31 @@ class testCases(unittest.TestCase):
         if self.total == "Total: 116.9":
             print("Total is Correct")
 
+
     def tearDown(self):
         time.sleep(5)
         self.driver.quit()
+
+
+def main():
+    count = 0
+    while count < 5:
+        a = testCases()
+        a.setUp()
+        a.test1()
+        a.tearDown()
+
+        a.setUp()
+        a.test2()
+        a.tearDown()
+
+        a.setUp()
+        a.test3()
+        a.tearDown()
+        count = count + 1
+if __name__ == '__main__':
+    main()
+
 
 
 
