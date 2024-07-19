@@ -18,6 +18,7 @@ options.add_experimental_option("detach", True)
 
 
 class testCases(unittest.TestCase):
+    # Setup function 
     def setUp(self):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
         self.driver.maximize_window()
@@ -25,6 +26,8 @@ class testCases(unittest.TestCase):
         self.wait = WebDriverWait(self.driver,10)
         self.waitTwentySec = WebDriverWait(self.driver, 20)
 
+    # Open App, Go to Contact, Click Submit, Check Error Message
+    # Populate Mandatory Fields, Check Error Message if Gone
     def test1(self):
         self.links = self.driver.find_elements(By.XPATH, "//a[@href]")
         for Contact in self.links:
@@ -58,6 +61,8 @@ class testCases(unittest.TestCase):
         else:
             print("Error Message Gone")
 
+    # Open App, Go to Contact, Populate Mandatory Fields, Click Submit
+    # Validate Success submission message
     def test2(self):
         self.links = self.driver.find_elements(By.XPATH, "//a[@href]")
         for Contact in self.links:
@@ -86,6 +91,9 @@ class testCases(unittest.TestCase):
         else:
             print("No Success Message")
 
+    # Open App, Go to Shop, Buy 2 Stuffed Frog,5 Fluffy Bunny, 3 Valentine Bear
+    # Go to cart page, Verify the subtotal for each product is correct
+    # Verify the price for each product, Verify that total = sum(subtotals)
     def test3(self):
         self.links = self.driver.find_elements(By.XPATH, "//a[@href]")
         for Shop in self.links:
@@ -151,7 +159,7 @@ class testCases(unittest.TestCase):
         if self.total == "Total: 116.9":
             print("Total is Correct")
 
-
+    # Terminate Function
     def tearDown(self):
         time.sleep(5)
         self.driver.quit()
@@ -175,15 +183,4 @@ def main():
         count = count + 1
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
+    
